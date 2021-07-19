@@ -1,4 +1,4 @@
-package drxgb.util;
+package com.drxgb.util;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -19,6 +19,10 @@ public abstract class Report {
 	
 	private static final SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd MMMM yyyy - HH:mm:ss");
 	
+	/**
+	 * Registra uma exceção lançada em um arquivo de texto.
+	 * @param e A exceção lançada.
+	 */
 	public static void writeErrorLog(Exception e) {
 		Calendar cal = Calendar.getInstance();
 		String logPath = "log/";
