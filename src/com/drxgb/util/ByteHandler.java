@@ -7,6 +7,12 @@ package com.drxgb.util;
  */
 public abstract class ByteHandler
 {
+	/*
+	 * ===========================================================
+	 * 			*** MÉTODOS PÚBLICOS ***
+	 * ===========================================================
+	 */
+	
 	/**
 	 * Converte um valor do tipo {@code Long} para uma tripa de bytes.
 	 * @param n O valor numérico a ser convertido
@@ -60,6 +66,30 @@ public abstract class ByteHandler
 	{
 		return parseNumber(0L, b, Byte.BYTES).byteValue();
 	}
+	
+	
+	/**
+	 * Converte o conjunto de {@code byte} para um conjunto de {@code char}.
+	 * @param b O conjunto de bytes.
+	 * @return Um conjunto de {@code char}.
+	 */
+	public static char[] toCharArray(byte[] b)
+	{
+		int size = b.length;
+		char[] ch = new char[size];
+		for (int i = 0; i < size; ++i)
+		{
+			ch[i] = (char) b[i];
+		}
+		return ch;
+	}
+	
+	
+	/*
+	 * ===========================================================
+	 * 			*** MÉTODOS PRIVADOS ***
+	 * ===========================================================
+	 */
 	
 	
 	/**
