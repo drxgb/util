@@ -1,7 +1,5 @@
 package com.drxgb.util;
 
-import java.nio.ByteBuffer;
-
 /**
  * Classe abstrata responsável por converter número em tripa de bytes.
  * @author Dr.XGB
@@ -16,10 +14,7 @@ public abstract class ByteHandler
 	 */
 	public static byte[] getBytes(Long n)
 	{
-		ByteBuffer buffer = ByteBuffer.allocate(Long.BYTES);
-		buffer.putLong(n);
-		buffer.flip();
-		return buffer.array();
+		return parseByteArray(n, Long.BYTES);
 	}
 	
 	
@@ -30,10 +25,7 @@ public abstract class ByteHandler
 	 */
 	public static byte[] getBytes(Integer n)
 	{
-		ByteBuffer buffer = ByteBuffer.allocate(Integer.BYTES);
-		buffer.putInt(n);
-		buffer.flip();
-		return buffer.array();
+		return parseByteArray(n.longValue(), Integer.BYTES);
 	}
 	
 	
@@ -71,7 +63,7 @@ public abstract class ByteHandler
 	
 	
 	/**
-	 * Funçãoo auxiliar que converte o conjunto de bytes a um valor numérico.
+	 * Função auxiliar que converte o conjunto de bytes a um valor numérico.
 	 * @param n Valor afetado pela função.
 	 * @param b Conjunto de bytes para ser convertido.
 	 * @param size Quantidade de bytes a serem lidas.
@@ -82,5 +74,23 @@ public abstract class ByteHandler
 		for (int i = 0; i < size; ++i)
 			n += b[i] << (i * 8);
 		return n;
+	}
+	
+	
+	/**
+	 * Função auxiliar que recebe um valor e os divide em um grupo de bytes.
+	 * @param n Valor afetado pela função.
+	 * @param size Tamanho do conjunto de bytes.
+	 * @return Um array de bytes extraídos do valor dado por argumento.
+	 */
+	private static byte[] parseByteArray(Long n, int size)
+	{
+		byte[] b = new byte[size];
+		for (int i = 0; i < size; ++i)
+		{
+			Long l = (n >> (i * 8)) % 0x100;
+			b[i] = l.byteValue();
+		}
+		return b;
 	}
 }
