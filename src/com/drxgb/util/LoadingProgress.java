@@ -137,6 +137,24 @@ public class LoadingProgress
 	}
 	
 	
+	/**
+	 * Limpa o estado do progresso.
+	 */
+	public void clear()
+	{
+		setProgress(min);
+	}
+	
+	
+	/**
+	 * Completa o estado do progresso.
+	 */
+	public void fill()
+	{
+		setProgress(max);
+	}
+	
+	
 	@Override
 	public String toString()
 	{
