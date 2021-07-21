@@ -1,5 +1,8 @@
 package com.drxgb.util;
 
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
+
 /**
  * Classe abstrata responsável por converter número em tripa de bytes.
  * @author Dr.XGB
@@ -14,24 +17,73 @@ public abstract class ByteHandler
 	 */
 	
 	/**
-	 * Converte um valor do tipo {@code Long} para uma tripa de bytes.
+	 * Converte um valor do tipo {@code Long} para um container de bytes.
 	 * @param n O valor numérico a ser convertido
-	 * @return Uma tripa de bytes correspendente ao valor dado por argumento.
+	 * @return Um container de bytes correspendente ao valor dado por argumento.
+	 * @see ByteContainer
 	 */
-	public static byte[] getBytes(Long n)
+	public static ByteContainer getBytes(Long n)
 	{
 		return parseByteArray(n, Long.BYTES);
 	}
 	
 	
 	/**
-	 * Converte um valor do tipo {@code Integer} para uma tripa de bytes.
+	 * Converte um valor do tipo {@code Integer} para um container de bytes.
 	 * @param n O valor numérico a ser convertido
-	 * @return Uma tripa de bytes correspendente ao valor dado por argumento.
+	 * @return Um container de bytes correspendente ao valor dado por argumento.
+	 * @see ByteContainer
 	 */
-	public static byte[] getBytes(Integer n)
+	public static ByteContainer getBytes(Integer n)
 	{
 		return parseByteArray(n.longValue(), Integer.BYTES);
+	}
+	
+	
+	/**
+	 * Separa todos os caracteres contidos na {@code String} e os armazena
+	 * em um container de bytes.
+	 * @param str Texto a ser guardado no container.
+	 * @param charset Tipo de codificação dos caracteres.
+	 * @return Um container de bytes com todos os caracteres da string.
+	 * @throws UnsupportedEncodingException Quando o tipo de codificação não é corresponde a nenhum
+	 * dos tipos suportados.
+	 */
+	public static ByteContainer getBytes(String str, String charset) throws UnsupportedEncodingException
+	{
+		ByteContainer container = new ByteContainer();
+		for (byte b : str.getBytes(charset))
+			container.getContainer().add(b);
+		return container;
+	}
+	
+	
+	/**
+	 * Separa todos os caracteres contidos na {@code String} e os armazena
+	 * em um container de bytes.
+	 * @param str Texto a ser guardado no container.
+	 * @param charset Tipo de codificação dos caracteres.
+	 * @return Um container de bytes com todos os caracteres da string.
+	 * @throws UnsupportedEncodingException Quando o tipo de codificação não é corresponde a nenhum
+	 * dos tipos suportados.
+	 */
+	public static ByteContainer getBytes(String str, Charset charset) throws UnsupportedEncodingException
+	{
+		return getBytes(str, charset.displayName());
+	}
+	
+	
+	/**
+	 * Separa todos os caracteres contidos na {@code String} e os armazena
+	 * em um container de bytes, já com o padrão UTF-8.
+	 * @param str Texto a ser guardado no container.
+	 * @return Um container de bytes com todos os caracteres da string.
+	 * @throws UnsupportedEncodingException Quando o tipo de codificação não é corresponde a nenhum
+	 * dos tipos suportados.
+	 */
+	public static ByteContainer getBytes(String str) throws UnsupportedEncodingException
+	{
+		return getBytes(str, "UTF-8");
 	}
 	
 	
@@ -68,23 +120,6 @@ public abstract class ByteHandler
 	}
 	
 	
-	/**
-	 * Converte o conjunto de {@code byte} para um conjunto de {@code char}.
-	 * @param b O conjunto de bytes.
-	 * @return Um conjunto de {@code char}.
-	 */
-	public static char[] toCharArray(byte[] b)
-	{
-		int size = b.length;
-		char[] ch = new char[size];
-		for (int i = 0; i < size; ++i)
-		{
-			ch[i] = (char) b[i];
-		}
-		return ch;
-	}
-	
-	
 	/*
 	 * ===========================================================
 	 * 			*** MÉTODOS PRIVADOS ***
@@ -111,16 +146,16 @@ public abstract class ByteHandler
 	 * Função auxiliar que recebe um valor e os divide em um grupo de bytes.
 	 * @param n Valor afetado pela função.
 	 * @param size Tamanho do conjunto de bytes.
-	 * @return Um array de bytes extraídos do valor dado por argumento.
+	 * @return Um container de bytes extraídos do valor dado por argumento.
 	 */
-	private static byte[] parseByteArray(Long n, int size)
+	private static ByteContainer parseByteArray(Long n, int size)
 	{
-		byte[] b = new byte[size];
+		ByteContainer container = new ByteContainer();
 		for (int i = 0; i < size; ++i)
 		{
 			Long l = (n >> (i * 8)) % 0x100;
-			b[i] = l.byteValue();
+			container.getContainer().add(l.byteValue());
 		}
-		return b;
+		return container;
 	}
 }
