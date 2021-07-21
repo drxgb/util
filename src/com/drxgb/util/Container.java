@@ -39,6 +39,123 @@ public abstract class Container<T>
 	
 	/*
 	 * ===========================================================
+	 * 			*** MÉTODOS PÚBLICOS ***
+	 * ===========================================================
+	 */
+	
+	/**
+	 * <p>Insere um elemento ao container.</p>
+	 * <p>Caso tenham elementos à frente da posição solicitada,
+	 * todos eles serão empurrados para a direita antes da inserção.</p>
+	 * @param index Índice onde o conteúdo será inserido.
+	 * @param e Elemento a ser inserido ao container.
+	 * @return O próprio container, podendo encadear funções de inserção e remoção
+	 * na sequência.
+	 */
+	public Container<T> insert(int index, T e)
+	{
+		container.add(index, e);
+		return this;
+	}
+	
+	
+	/**
+	 * <p>Insere um conjunto de elementos ao container.</p>
+	 * <p>Caso tenham elementos à frente da posição solicitada,
+	 * todos eles serão empurrados para a direita antes da inserção.</p>
+	 * @param index Índice onde o conteúdo será inserido.
+	 * @param e Conjunto de elementos a ser inserido ao container.
+	 * @return O próprio container, podendo encadear funções de inserção e remoção
+	 * na sequência.
+	 */
+	public Container<T> insert(int index, List<T> e)
+	{
+		container.addAll(index, e);
+		return this;
+	}
+	
+	
+	/**
+	 * <p>Remove o elemento ao container.</p>
+	 * <p>O sistema vai procurar se o elemento existe no container.
+	 * Se o elemento não for encontrado, nada acontecerá e o container
+	 * terá sua estrutura permanecida.</p>
+	 * @param e Elemento a ser removido ao container.
+	 * @return O próprio container, podendo encadear funções de inserção e remoção
+	 * na sequência.
+	 */
+	public Container<T> remove(T e)
+	{
+		container.remove(e);
+		return this;
+	}
+	
+	
+	/**
+	 * <p>Remove o elemento ao container.</p>
+	 * @param index Índice do elemento a ser removido ao container.
+	 * @return O próprio container, podendo encadear funções de inserção e remoção
+	 * na sequência.
+	 */
+	public Container<T> remove(int index)
+	{
+		container.remove(index);
+		return this;
+	}
+	
+	
+	/**
+	 * Insere um elemento no início do container.
+	 * @param e Elemento a ser inserido.
+	 * @return O próprio container, podendo encadear funções de inserção e remoção
+	 * na sequência.
+	 */
+	public Container<T> prepend(T e)
+	{
+		return insert(0, e);
+	}
+	
+	
+	/**
+	 * Insere um conjunto de elementos no início do container.
+	 * @param e Conjunto de elementos a ser inserido.
+	 * @return O próprio container, podendo encadear funções de inserção e remoção
+	 * na sequência.
+	 */
+	public Container<T> prepend(List<T> e)
+	{
+		return insert(0, e);
+	}
+	
+	
+	/**
+	 * Insere um elemento no final do container.
+	 * @param e Elemento a ser inserido.
+	 * @return O próprio container, podendo encadear funções de inserção e remoção
+	 * na sequência.
+	 */
+	public Container<T> append(T e)
+	{
+		container.add(e);
+		return this;
+	}
+	
+	
+	/**
+	 * Insere um conjunto de elementos no final do container.
+	 * @param e Conjunto de elementos a ser inserido.
+	 * @return O próprio container, podendo encadear funções de inserção e remoção
+	 * na sequência.
+	 */
+	public Container<T> append(List<T> e)
+	{
+		container.addAll(e);
+		return this;
+	}
+	
+	
+	/*
+	 * ===========================================================
 	 * 			*** MÉTODOS PÚBLICOS ABSTRATOS ***
 	 * ===========================================================
 	 */
