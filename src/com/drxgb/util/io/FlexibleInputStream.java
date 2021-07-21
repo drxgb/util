@@ -5,6 +5,13 @@ import java.io.InputStream;
 
 import com.drxgb.util.ValueHandler;
 
+/**
+ * <p>Classe herdada de {@code BufferedInputStream}.</p>
+ * <p>Esta classe lhe permite alterar livremente a posição do
+ * buffer da leitura do arquivo.</p> 
+ * @author Dr.XGB
+ * @version 1.6
+ */
 public class FlexibleInputStream extends BufferedInputStream
 {
 	/*
@@ -36,6 +43,6 @@ public class FlexibleInputStream extends BufferedInputStream
 	
 	public void setPos(int p)
 	{
-		ValueHandler.clamp(p, 0, count);
+		pos = ValueHandler.clamp(p, 0, count);
 	}
 }
