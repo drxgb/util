@@ -120,6 +120,34 @@ public abstract class ByteHandler
 	}
 	
 	
+	/**
+	 * Converte {@code byte[]} para {@code Byte[]}.
+	 * @param b Array de bytes.
+	 * @return Array convertido de bytes.
+	 */
+	public static Byte[] box(byte[] b)
+	{
+		Byte[] boxBytes = new Byte[b.length];
+		for (int i = 0; i < b.length; ++i)
+			boxBytes[i] = b[i];
+		return boxBytes;
+	}
+	
+	
+	/**
+	 * Converte {@code Byte[]} para {@code byte[]}.
+	 * @param box Array de bytes.
+	 * @return Array convertido de bytes.
+	 */
+	public static byte[] unbox(Byte[] box)
+	{
+		byte[] b = new byte[box.length];
+		for (int i = 0; i < box.length; ++i)
+			b[i] = box[i];
+		return b;
+	}
+	
+	
 	/*
 	 * ===========================================================
 	 * 			*** MÉTODOS PRIVADOS ***
