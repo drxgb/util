@@ -2,6 +2,8 @@ package com.drxgb.util;
 
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Classe abstrata responsável por converter número em tripa de bytes.
@@ -145,6 +147,17 @@ public abstract class ByteHandler
 		for (int i = 0; i < box.length; ++i)
 			b[i] = box[i];
 		return b;
+	}
+	
+	
+	/**
+	 * Insere um array de bytes em uma Lista.
+	 * @param b Array de bytes.
+	 * @return Uma lista com os mesmo bytes do array dado por argumento.
+	 */
+	public static List<Byte> collect(byte[] b)
+	{
+		return Arrays.asList(box(b));
 	}
 	
 	
