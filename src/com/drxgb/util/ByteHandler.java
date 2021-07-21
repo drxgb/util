@@ -53,7 +53,7 @@ public abstract class ByteHandler
 	{
 		ByteContainer container = new ByteContainer();
 		for (byte b : str.getBytes(charset))
-			container.getContainer().add(b);
+			container.append(b);
 		return container;
 	}
 	
@@ -154,7 +154,7 @@ public abstract class ByteHandler
 		for (int i = 0; i < size; ++i)
 		{
 			Long l = (n >> (i * 8)) % 0x100;
-			container.getContainer().add(l.byteValue());
+			container.append(l.byteValue());
 		}
 		return container;
 	}
