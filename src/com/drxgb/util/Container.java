@@ -1,6 +1,6 @@
 package com.drxgb.util;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -18,7 +18,7 @@ public abstract class Container<T>
 	 * ===========================================================
 	 */
 	
-	protected List<T> container = new ArrayList<>();	
+	protected List<T> container = new LinkedList<>();	
 	
 	
 	/*
