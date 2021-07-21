@@ -18,7 +18,7 @@ public abstract class StringParser
 	 * chegar ao fim do arquivo ou quando encontrar um caractere nulo (0x00).</p>
 	 * @param reader Instância de {@code Reader}.
 	 * @return O resultado da leitura do arquivo.
-	 * @throws IOException
+	 * @throws IOException Se o {@code Reader} for inefinido ou nulo.
 	 */
 	public static String fromReader(Reader reader) throws IOException
 	{
@@ -37,9 +37,9 @@ public abstract class StringParser
 	 * <p>Lê os dados de um arquivo e o transforma em string.</p>
 	 * <p>A leitura é realizada em uma tripa de bytes e se encerra até
 	 * chegar ao fim do arquivo ou quando encontrar um caractere nulo (0x00).</p>
-	 * @param reader Instância de {@code InputStream}.
+	 * @param is Instância de {@code InputStream}.
 	 * @return O resultado da leitura do arquivo.
-	 * @throws IOException
+	 * @throws IOException IOException Se o {@code InputStream} for inefinido ou nulo.
 	 */
 	public static String fromInputStream(InputStream is) throws IOException
 	{
