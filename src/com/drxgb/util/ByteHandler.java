@@ -6,7 +6,7 @@ import java.nio.charset.Charset;
 /**
  * Classe abstrata responsável por converter número em tripa de bytes.
  * @author Dr.XGB
- * @version 1.0
+ * @version 1.5
  */
 public abstract class ByteHandler
 {
