@@ -29,7 +29,7 @@ public abstract class Container<T>
 	
 	/**
 	 * Recebe o conjunto do conteúdo do conatiner.
-	 * @return
+	 * @return O próprio container.
 	 */
 	public List<T> getContainer()
 	{
