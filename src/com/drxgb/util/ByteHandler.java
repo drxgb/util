@@ -179,7 +179,7 @@ public abstract class ByteHandler
 	{
 		for (int i = 0; i < size; ++i)
 		{
-			long a = b[i] & 0xFF;
+			long a = (long) b[i] & 0xFF;
 			n += a << (i * 8);
 		}
 		return n;
