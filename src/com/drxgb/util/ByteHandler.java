@@ -178,7 +178,7 @@ public abstract class ByteHandler
 	private static Long parseNumber(Long n, byte[] b, int size)
 	{
 		for (int i = 0; i < size; ++i)
-			n += b[i] << (i * 8);
+			n += (b[i] << (i * 8)) & 0xFF;
 		return n;
 	}
 	
@@ -194,7 +194,7 @@ public abstract class ByteHandler
 		ByteContainer container = new ByteContainer();
 		for (int i = 0; i < size; ++i)
 		{
-			Long l = (n >> (i * 8)) % 0x100;
+			Long l = (n >> (i * 8)) & 0xFF;
 			container.append(l.byteValue());
 		}
 		return container;
