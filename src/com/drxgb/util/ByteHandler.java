@@ -178,7 +178,10 @@ public abstract class ByteHandler
 	private static Long parseNumber(Long n, byte[] b, int size)
 	{
 		for (int i = 0; i < size; ++i)
-			n += (b[i] << (i * 8)) & 0xFF;
+		{
+			long a = b[i] & 0xFF;
+			n += a << (i * 8);
+		}
 		return n;
 	}
 	
