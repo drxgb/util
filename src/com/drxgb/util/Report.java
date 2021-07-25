@@ -13,7 +13,7 @@ import java.util.Date;
  * registros ficarão gravados em arquivos de texto separado
  * por data.
  * @author Dr.XGB
- * @version 1.0
+ * @version 1.1
  */
 public abstract class Report {
 	
@@ -25,7 +25,7 @@ public abstract class Report {
 	 */
 	public static void writeErrorLog(Exception e) {
 		Calendar cal = Calendar.getInstance();
-		String logPath = "log/";
+		final String logPath = "log/";
 		String logName = "log";
 		logName += String.valueOf(cal.get(Calendar.YEAR));
 		logName += String.format("%2d", cal.get(Calendar.MONTH) + 1);
@@ -43,17 +43,49 @@ public abstract class Report {
 			log.append(" -> ");
 			log.append(e.getMessage());
 			log.append("\n---\n");
-			for(int i = 0; i < e.getStackTrace().length; i++) {
-				for(int j = 0; j < i; j++) {
-					log.append("    ");
-				}
-				log.append(e.getStackTrace()[i].toString() + "\n");
-			}
-			log.append("\n");
+			writeStackTrace(log, e);
+			writeCauses(log, e);
 			file.write(log.toString());
 		} catch (IOException e1) {
 			e1.printStackTrace();
 		} 
+	}
+	
+	
+	/**
+	 * Escreve todos os detalhes do erro.
+	 * @param log O texto onde está sendo escrito o conteúdo do err.
+	 * @param e A exceção lançada.
+	 */
+	private static void writeStackTrace(StringBuilder log, Throwable e)
+	{
+		for(int i = 0; i < e.getStackTrace().length; i++) {
+			for(int j = 0; j < i; j++) {
+				log.append("    ");
+			}
+			log.append(e.getStackTrace()[i].toString() + "\n");
+		}
+		log.append("\n");
+	}
+	
+	
+	/**
+	 * Escreve as outras exceções causadas para que a mesma
+	 * seja lançada.
+	 * @param log O texto onde está sendo escrito o conteúdo do err.
+	 * @param e A exceção lançada.
+	 */
+	private static void writeCauses(StringBuilder log, Exception e)
+	{
+		Throwable t = e;
+		while ((t = t.getCause()) != null)
+		{
+			log.append("Caused by: ");
+			log.append(t.toString());
+			log.append(" -> ");
+			log.append(t.getMessage());
+			writeStackTrace(log, t);
+		}
 	}
 	
 }
