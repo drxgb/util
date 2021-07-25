@@ -82,8 +82,7 @@ public abstract class Report {
 		{
 			log.append("Caused by: ");
 			log.append(t.toString());
-			log.append(" -> ");
-			log.append(t.getMessage());
+			log.append("\n");
 			writeStackTrace(log, t);
 		}
 	}
