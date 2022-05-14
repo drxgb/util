@@ -59,7 +59,7 @@ public abstract class StringFormatter
 	 */
 	public static String unescape(String str)
 	{
-		Pattern p = Pattern.compile("(\\\\u[0-9A-Za-z]+)");
+		Pattern p = Pattern.compile("(\\\\u[0-9A-Fa-f]+)");
 		int index = 0;
 		while ((index = str.indexOf("\\u", index)) != -1)
 		{
