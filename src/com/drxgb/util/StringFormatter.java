@@ -60,17 +60,12 @@ public abstract class StringFormatter
 	public static String unescape(String str)
 	{
 		Pattern p = Pattern.compile("(\\\\u[0-9A-Fa-f]+)");
-		int index = 0;
-		while ((index = str.indexOf("\\u", index)) != -1)
+		Matcher m = p.matcher(str);		
+		for (int i = 0; m.find(); ++i)
 		{
-			String substr = str.substring(index);
-			Matcher m = p.matcher(substr);		
-			for (int i = 0; m.find(); ++i)
-			{
-				String group = m.group(i);
-				int hex = Integer.parseInt(group.substring(2), 16);
-				str = str.replace(group, "" + (char) hex);
-			}
+			String group = m.group(i);
+			int hex = Integer.parseInt(group.substring(2), 16);
+			str = str.replace(group, "" + (char) hex);
 		}
 		return str;
 	}
