@@ -1,5 +1,8 @@
 package com.drxgb.util;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Classe abstrata responsável por tratar strings e fazer
  * suas devidas conversões
@@ -44,5 +47,31 @@ public abstract class StringFormatter
 				out += c;
 		}
 		return out;
+	}
+	
+	
+	/**
+	 * Converte os caracteres Unicode para o padrão do Java.
+	 * <p>Exemplo:</p>
+	 * <code>\u0048</code> vira <code>H</code>.
+	 * @param str A entrada do string a ser convertido.
+	 * @return Saída do string com os caracteres Unicode substituídos.
+	 */
+	public static String unescape(String str)
+	{
+		Pattern p = Pattern.compile("(\\\\u[0-9A-Za-z]+)");
+		int index = 0;
+		while ((index = str.indexOf("\\u", index)) != -1)
+		{
+			String substr = str.substring(index);
+			Matcher m = p.matcher(substr);		
+			for (int i = 0; m.find(); ++i)
+			{
+				String group = m.group(i);
+				int hex = Integer.parseInt(group.substring(2), 16);
+				str = str.replace(group, "" + (char) hex);
+			}
+		}
+		return str;
 	}
 }
